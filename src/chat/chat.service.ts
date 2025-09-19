@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { createClient, RedisClientType } from 'redis';
 import { QdrantClient } from '@qdrant/js-client-rest';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { v4 as uuidv4 } from 'uuid';
 // import { Observable, Subject } from 'rxjs';
 
 @Injectable()
