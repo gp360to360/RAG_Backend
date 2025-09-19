@@ -54,6 +54,10 @@ export class ChatController {
   async clearChatHistory(@Param('sessionId') sessionId: string) {
     await this.chatService.clearHistory(sessionId);
   }
+  @Get()
+  async getWelcomeMessage() {
+    return this.chatService.getWelcomeMessage();
+  }
 }
 // interface MessageEvent {
 //   data: string | object;

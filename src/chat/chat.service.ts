@@ -209,6 +209,19 @@ export class ChatService implements OnModuleInit, OnModuleDestroy {
 
     return allSessions;
   }
+  async getWelcomeMessage(): Promise<{ reply: string }> {
+    // Use a unique ID for this temporary session to avoid collisions
+    const tempSessionId = `welcome-session-${uuidv4()}`;
+    const defaultMessage = 'Hello, what is the latest news?';
+
+    // Call the existing sendMessage function to get a real response from the RAG pipeline
+    const botResponse = await this.sendMessage(tempSessionId, defaultMessage);
+
+    // Clean up the temporary session from Redis so it doesn't clutter the database
+    await this.clearHistory(tempSessionId);
+
+    return { reply: botResponse };
+  }
 }
 // interface MessageEvent {
 //   data: string | object;
